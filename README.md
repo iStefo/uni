@@ -273,3 +273,149 @@ insert x (Node a l r)
 data Tree a = Emtpy | Node a (Tree a) (Tree a)
 ```
 
+To prove property P(t) for all finite `t :: Tree a`
+
+**Base case**: Prove `P(Empty)` and
+
+**Induction step**: Prove `P(Node x t1 t2)` assuming the induction hypotheses `P(t1)` and `P(t2)`
+
+Example: `flat (mapTree f t) = map f (flat t)`
+
+H1: `flat (mapTree f t1) = map f (flat t1)`
+H2: `flat (mapTree f t2) = map f (flat t2)`
+
+To show: `flat (mapTree f (Node x t1 t2)) = map f (flat (Node x t1 t2))`
+
+```hs
+flat (mapTree f (Node x t1 t2))
+= flat (Node (f x) (mapTree f t1) (mapTree f t2))			-- by def of mapTree
+= flat (mapTree f t1) ++ [f x] ++ flat (mapTree f t2)		-- by def of flat
+= map f (flat t1) ++ [f x] ++ map f (flat t2)
+	-- by IH1 and IH2
+	
+map f (flat (Node x t1 t2))
+= map f (flat t1 ++ [x] ++ flat t2)							-- by def of flat
+= map f (flat t1) ++ [f x] ++ map f (flat t2)
+	-- by distributivity of map over ++
+```
+
+## I/O
+Haskell programs are pure mathematical functions:
+> Haskell programs have no side effects
+
+Reading and writing are side effects:
+> Interactive programs have side effects
+
+Haskell distinguished expressions without side effects from expressions with side effects (*actions*) by their type:
+
+```hs
+IO a
+```
+
+Some examples:
+
+```hs
+getChar :: IO Char			-- reads a Char from stdin, echoes it to stdout and resturns result
+putChar :: Char -> IO ()	-- writes a Char to stdout, return no result
+return :: a -> IO a			-- performs no action, just gives values as a result
+
+putStr :: String -> IO ()
+putStr []		= return ()
+putStr (c:cs)	= do putChar c
+					 putStr cs
+
+getLine :: IO String
+getLine = do x <- getChar
+			 if x == '\n' then
+			 	return []
+			 else
+			 	do xs <- getLine
+			 	   return (x:xs)
+```
+
+### Sequencing: `do`
+```hs
+
+get2 :: IO (Char, Char)
+get2 = do x <- getChar		-- result is named x
+          getChar			-- result is ignored
+          y <- getChar
+          return (x,y)
+```
+
+Reading other types: Usefull class:
+```hs
+class Read a where
+	read :: String -> a
+
+-- example
+getInt :: IO Integer
+getInt = do xs <- getLine
+			return (read xs)
+```
+
+### File I/O
+```hs
+import System.IO
+type FilePath = String
+readFile :: FilePath -> IO String			-- reads lazily, as much as needed
+writeFile :: FilePath -> String -> IO ()	-- writes whole file
+appendFile :: FilePath -> String -> IO()	-- appends string to file
+```
+
+`data Handle`: Opaque type, implementation dependent. A record used by the Haskell run-time system to manage I/O with file system objects.
+
+```hs
+date IOMode = ReadMode | WriteMode | AppendMode | ReadWriteMode
+openFile :: FilePath -> IOMOde -> IO Handle		-- creates handle to file and opens file
+hClose :: Handle -> IO ()						-- closes file
+stdin :: Handle
+stdout :: Handle
+
+-- read mode
+hGetChar :: Handle -> IO Char
+hGetLine :: Handle -> IO String
+hGetContents :: Handle -> IO String				-- lazily
+
+-- write mode
+hPutChar :: Handle -> Char -> IO ()
+hPutStr :: Handle -> String -> IO ()
+hPutStrLn :: Handle -> String -> IO ()
+hPrint :: Show a => Handle -> a -> IO ()
+```
+
+### Network I/O
+```hs
+data Socket
+data PortId = Portnumber PortNumber | ...
+data PortNumber
+	instance Num Portnumber
+	
+-- server functions
+listenOn :: PortId -> IO Socket					-- create server side socket for port
+accept :: Socket -> IO (Handle, ..., ...)		-- can read/write from/to socket
+sClose :: Socket -> IO ()
+
+-- client functions
+type HostName = String
+connectTo :: HostName -> PortId -> IO Handle
+```
+
+Ping-Pong example:
+
+```hs
+main :: IO ()
+main  =  withSocketsDo $ do
+  sock <- listenOn $ PortNumber 9000
+  (h, _, _) <- accept sock
+  hSetBuffering h LineBuffering
+  loop h
+sClose sock
+loop :: Handle -> IO () looph = do
+  input <- hGetLine h
+  if take 4 input == "quit"
+  then do hPutStrLn h "goodbye!"
+          hClose h
+  else do hPutStrLn h ("got " ++ input)
+loop h
+```
