@@ -419,3 +419,89 @@ loop :: Handle -> IO () looph = do
   else do hPutStrLn h ("got " ++ input)
 loop h
 ```
+
+## Modules
+> Module = collection of type, function, class etc. definitions
+
+Recommendation: One module per file, module `M` in file `M.hs`.
+
+### exporting
+```hs
+module M (T, f, ...) where 		-- selective export
+data T = ...				-- only T, but not its constructors are exported
+
+-- vs:
+module M (T(..)) where
+data T = ...				-- all constructors are exported
+```
+
+### importing
+```hs
+import A
+import B
+import C
+... f ... 		-- where does f come from?
+```
+
+Qualified names:
+```hs
+import qualified A
+A.f
+
+-- with renaming
+import qualified TotallyAwesomeModule as TAM
+```
+
+## Abstract Data Types
+Example: Implementation of `Set` using lists, but not exposing a constructor, only methods to create instances.
+
+```hs
+module Set (Set, empty, insert, isin, size) where
+-- Interface
+empty  :: Set a
+insert :: Eq a => a -> Set a -> Set a
+isin   :: Eq a => a -> Set a -> Bool
+size   :: Set a -> Int
+-- Implementation
+data Set a = Set [a]		-- notice the "extra" constructor Set
+...
+```
+
+Correctness can be proven by analogies to mathematics.
+
+## Lazy Evaluation
+* Avoids unnecessary evaluations
+* Terminates as often as possible
+* Supports infinite lists
+* Increases modularity
+
+**redex** = *red*ucible *ex*pression
+
+Haskell uses *outermost reduction*: Always reduce an outermost redex. The unevaluated arguments are substituted into the function body: `sq (3+4) = (3+4) + (3+4)`
+
+Outermost reduction requires more evaluation steps. Solution: **Sharing**!
+
+Lazy evaluation := outermost reduction + sharing
+
+* Arguments of fucntions are evaluated only if needed to continue the evaluation of the function
+* Arguments are not necessarily evaluated fully, but only far enough to evaluate the function
+* Each argument is evaluated at most once (sharing)
+
+**Haskell never reduces inside a lambda**: `\x -> False && x` cannot be reduced, because:
+
+* Functions are black boxes
+* All you can do with a function is apply it
+
+**Exception**: Arithmetic operators and other built-in functions evaluate their arguments first:
+```hs
+3 * 5			-- redex
+0 * head (...)	-- not a redex
+```
+
+Lazy evaluation enables working with infinite lists:
+```hs
+ones :: [Int]
+ones = 1 : ones
+
+head ones		-- 1, because head ones = head (1 : ones) = 1
+```
