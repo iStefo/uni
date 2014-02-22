@@ -73,3 +73,11 @@ Mit Kantengewicht:
 Nicht schaltbare Transition:
 
 ![Schalten 3](bild_03_schalten_3.png "Nicht schaltbar")
+
+Nebenläufiges Schalten:
+
+![Nebenläufig](bild_03_petri_nebenläufig.png)
+
+Deadlock beim Ausleihen von Büchern:
+
+![Deadlock](bild_03_petri_bücher.png)
