@@ -159,14 +159,12 @@ Aufgabe des Bankier: Vergabe von Krediten, Liquidität anhand von Heuristik. Gro
 
 Beispiel:
 
------------------------------------------
 | Kunde | aktueller Kredit | max Kredit |
------------------------------------------
+|-------|------------------|------------|
 | A     | 1                | 6          |
 | B     | 1                | 5          |
 | C     | 1                | 4          |
 | D     | 4	               | 7          |
------------------------------------------
 
 Die Bank hat noch 3 Einheiten zur Verfügung.
 
