@@ -52,10 +52,24 @@ Modell des Zustandsautomat mit Menge von **Zuständen S**, Menge von **Transitio
 * Schaltregel: Abziehen und Hinzufügen von Token
 * Markierung von Kanten
 
-Beispiele:
-
+#### Beispiele
 ![Petri 1](bild_03_petri_1.png)
 
 ![Petri 2](bild_03_petri_2.png)
 
 #### Schaltregel und Eigenschaften
+* Markierung
+	* Kapazität c
+	* Gewichtung w
+	* Markierung M
+* Schaltregeln:
+
+![Schalten 1](bild_03_schalten_1.png)
+
+Mit Kantengewicht:
+
+![Schalten 2](bild_03_schalten_2.png)
+
+Nicht schaltbare Transition:
+
+![Schalten 3](bild_03_schalten_3.png "Nicht schaltbar")
