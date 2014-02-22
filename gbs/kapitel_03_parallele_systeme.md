@@ -99,3 +99,73 @@ Bsp. Web-Server: *Verteiler*- und *Server*-Threads
 
 **Rückgabewerte** direkt über geteilte Variablen (eventuell Fehleranfällig) oder indirekt über **Callback-Funktionen**.
 
+### Synchronisation
+> Abstimmen des zeitlichen Verhaltens nebenläufiger Aktivitäten untereinander
+
+Zustände von Prozessen:
+
+![Prozesse](bild_03_prozesse.png)
+
+#### Wechselseitiger Ausschluss (WA)
+Petrinetz mit Anfangsmarkierung M0. Wenn 2 Transitionen t1 und t2 wechselseitig ausgeschlossen sind, dann ist keine Markierung M' erreichbar, so dass t1 und t2 gleichzeitig schaltbereit sind. Derartige Transitionen heißen *kritische Abschnitte*.
+
+![WA](bild_03_wechselseitig.png)
+
+**Anforderungen** an eine Lösung des WA:
+
+* Die kA sind wechselseitig ausgeschlossen
+* Realisierung darf nicht von der Reihenfolge der Ausführung der kA abhängen
+* Realisierung darf nicht von Annahmen über die Ausführungszeit abhängen
+* Kein Prozess darf undendlich lange daran gehindert werden, seinen kA auszuführen
+
+**Lösung des WA**: Semaphore (Dijkstra 1968)
+* Initialisierung
+* Prolog (protekt) - atomar!
+* Epilog (vrej) - atomar!
+
+In C:
+
+```c
+pthread_mutex_init(mutex);
+// ...
+pthread_lock(mutex);
+// ...
+pthread_unlock(mutex);
+```
+
+**Lösung des WA**: Monitor
+Methoden sind wechselseitig ausgeschlossen (weniger Programmierfehler). Prozess wird *wartend* gesetzt (cond.wait()) und wieder aktiviert (cond.signal()). Bsp. Java: **synchronized**.
+
+### Verklemmungen – Maßnahmen
+#### Ignorieren
+Vogel-Strauß-Politik
+
+#### Erkennen von Verklemmungen
+Algorithmen dazu. Konsequenz: Abbruch von Prozessen
+
+#### Verhindern von Verklemmungen
+* Geordnete BM-Anforderung
+* Globale BM-Zuteilung
+* Abschnittsweise BM-Zuteilung
+
+#### Vermeidung von Verklemmungen: Bankiers-Algorithmus
+Bank, Kunde, Kreditlinie für jeden Kunden.
+
+Aufgabe des Bankier: Vergabe von Krediten, Liquidität anhand von Heuristik. Grobes Vorgehen:
+
+1. Kundin fordert an
+2. Überprüfung der maximalen Anforderungen
+3. Zuteilung, wenn passend
+
+Beispiel:
+
+Kunde | aktueller Kredit | max Kredit
+-------------------------------------
+A     | 1                | 6
+B     | 1                | 5
+C     | 1                | 4
+D     | 4	               | 7
+
+Die Bank hat noch 3 Einheiten zur Verfügung.
+
+Annahme: C fordert noch 1 Einheit. Simulation der Anforderung zeigt, dass danach noch genug Einheiten vorhanden sind, um mindestens einen Kunden (C) bis zum Kreditrahmen zu bedienen. Zahlt C dann zurück, können B und D und dann schließlich A bedient werden.
