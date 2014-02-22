@@ -1,7 +1,7 @@
 # Grundlagen Betriebssysteme
 ## Kapitel 2 - Einführung
 ### Definition Betriebssystem
-> Das Betriebssystem wird gebildet durch die **Programme** eines digitalen Rechensystems, die zusammen mit den **Eigenschaften der Rechenanlage** die grundlage der möglichen BEtriebsarten des digitalen Rechensystems bilden und insbesondere die **Ausführung von Programmen steuern und überwachen**
+> Das Betriebssystem wird gebildet durch die **Programme** eines digitalen Rechensystems, die zusammen mit den **Eigenschaften der Rechenanlage** die grundlage der möglichen Betriebsarten des digitalen Rechensystems bilden und insbesondere die **Ausführung von Programmen steuern und überwachen**
 
 ### Definition Eingebettetes System
 > Der Begriff des eingebetteten Systems bezeichnet einen Rechner, welcher dezentral in einem technischen Kontext eingebunden ist. Dieser Rechner aht die Aufgabe, das eingebettete System zu steuern, zu regel, zu überwachen oder auch die Benutzerinteraktion zu ermöglichen und ist speziell für die vorliegende Aufgabe angepasst
@@ -59,4 +59,9 @@ Eingebettete Systeme, Chipkarten, Mobilität, Ubiquität
 * BS erfüllt nur Basismechanismen, mögl. viele Subsysteme ausgelagert
 * Systemfunktionen als Serverprozesse im Benutzermodus
 * Wenig Speicherbedarf (kleiner Footprint)
-* 
+
+### Hardwarenahe Programme
+* Binder und Lader
+* Binde-Module (Externe Referenzen)
+* Lader (Absoluter Lader, relativer Lader, Datenstrukturen, Algorithmen)
+* Dynmaische Binden (Code Sharing)
