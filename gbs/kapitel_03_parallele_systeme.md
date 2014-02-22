@@ -39,3 +39,23 @@ Beschreibung von Eigenschaften und deren Veränderungen über die Zeit. Duale Si
 * Ereignismenge E ⊆ E*
 * Kausalitätsrelation ≤ als partielle Ordnung über E
 * Aktionsmarkierungen α zur Zuordnung von Ereignissen auf Aktionen
+
+### Aktionen als Zustandsübergänge
+Modell des Zustandsautomat mit Menge von **Zuständen S**, Menge von **Transitionsaktionen R**, Menge möglicher **Anfangszustände S0**
+
+### Petri-Netze
+* Graph mit Knoten und Kanten
+* Knoten: Stellen (Kreis) und Transitionen (Rechteck)
+* Kanten: S -> T oder T -> S
+* Belegung der Stellen mit Marken (Token)
+* Zustand: Belegung der Stellen
+* Schaltregel: Abziehen und Hinzufügen von Token
+* Markierung von Kanten
+
+Beispiele:
+
+![Petri 1](bild_03_petri_1.png)
+
+![Petri 2](bild_03_petri_2.png)
+
+#### Schaltregel und Eigenschaften
