@@ -57,7 +57,7 @@ Modell des Zustandsautomat mit Menge von **Zuständen S**, Menge von **Transitio
 
 ![Petri 2](bild_03_petri_2.png)
 
-#### Schaltregel und Eigenschaften
+#### Schaltregel
 * Markierung
 	* Kapazität c
 	* Gewichtung w
@@ -81,3 +81,21 @@ Nebenläufiges Schalten:
 Deadlock beim Ausleihen von Büchern:
 
 ![Deadlock](bild_03_petri_bücher.png)
+
+#### Eigenschaften
+* **Lebendig**: Für jedes t gibt es eine erreichbare Markierung, in der t transitionsbereit ist
+* **Vollständige Verklemmung**: Es gibt eine erreichbare Markierung, in der kein t schalten kann
+* **Lokale Verklemmung**: Es gibt keine erreichbare Markierung, in der t schalten kann
+* **Verklemmungsfrei**: Anfangsmarkierung lebendig?
+* **Fairness**: Das Netz ist unfair für t, wenn es eine unendliche Sequenz gibt, in der t nur endlich oft auftritt, obwohl t unendlich oft transitionsbereit ist
+* **Verhungern**: Es gibt eine unendliche Sequenz, in der t niemals auftritt
+
+### Thread Konzept
+**Prozessbestandteile**: Adressraum (idR virtueller Adressraum), Handlungsvorschrift (Programmcode), ein oder mehrere Aktivitätsträger.
+
+> Thread = leichtgewichtiger Prozess
+
+Bsp. Web-Server: *Verteiler*- und *Server*-Threads
+
+**Rückgabewerte** direkt über geteilte Variablen (eventuell Fehleranfällig) oder indirekt über **Callback-Funktionen**.
+
