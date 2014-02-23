@@ -28,7 +28,7 @@ Einträge in Prozesstabelle (beispielhaft):
 
 Prozesszustände und -übergänge:
 
-![Prozesszustände](bild_04_prozesszustände.png)
+![Prozesszustände](bild_04_prozesszustände.png)
 
 #### Dispatcher
 Realisierung der Zustandübergänge zwischen Rechnend und Rechenwillig -> Kontextwechsel. Sichert den Zustand des aktuell rechnenden Prozesses, lädt den Zustand des ausgewählten rechenwilligen Prozesses. Arbeitet im *Systemmodus*.
