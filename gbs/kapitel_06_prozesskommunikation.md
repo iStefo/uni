@@ -85,6 +85,58 @@ ls -l | head
 grep "name" datei.txt | sort | more
 ```
 
-### Client-Server-Modell: Sockets
+### Client-Server-Modell
+**Server** stellt als Auftragnehmer Dienste zur Verfügung, **Client** nutzt als Auftraggeber die Dienste. Synchrone Kommunikation. Client meist a priori nicht bekannt, da dynamisch erzeugte Benutzerprozesse. Server bekanntes Subsystem, das einen Dienst bereitstellt.
 
-### Netzwerkprogrammierung
+![Server Verbindung](bild_06_server.png)
+
+Ein Server kann auch selbst Client sein (**Multi-Tier Architektur**):
+
+![Server 2](bild_06_server_2.png)
+
+**Peer-to-Peer Computing**:
+Keine Unterscheidung zwischen Server und Clients zur Eliminierung des Server-Flaschenhalses. Registrierung der Dienste über *Directory Service*.
+
+### Netzwerkprogrammierung: Sockets
+Einführung Verteilter Anwendungen durch Zerlegung der Anwendung in Subsysteme, welche *autonome Prozesse* sind. Eventuell relaisiert durch Client-Server-Modell.
+
+Realisierung über Sockets, **Abstraktion** von Medium, Paketgrößte, Paketwiederholung und Netzadresse:
+
+![Sockets](bild_06_sockets.png)
+
+**Basisoperationen**:
+* Richte Verbindung ein (`connect`)
+* Sende Daten
+* Empfange Daten
+* Schließe Verbindung
+* Assoziiere Socket mit einem Port
+* Warte auf eintreffende Daten (`listen`)
+* Akzeptiere Verbindungswünsche von entfernten Rechnern (oder Ports)
+
+Beispiel: Sockets in UNIX
+
+```c
+// SERVER
+int sock, consock;								// socket Dateideskriptoren
+
+sock = socket(AF_INET, SOCK_STREAM, 0);		// erzeugen
+
+bind(sock, ...);
+listen(sock, 5);								// erlaube Verbindungsaufnahme
+
+consock = accept(sock, ...);					// Verbindungsannahme
+nread = read(consock, buf, sizeof(buf));		// Empfangen von Daten
+
+close(consock); close(sock);
+
+// CLIENT
+int sock										// socket Dateideskriptor
+
+sock = socket(AF_INET, SOCK_STREAM, 0);		// erzeugen
+
+connect(sock, ...);								// Verbindungsaufbau
+
+write(sock, ...);								// Senden von Daten
+
+close(sock);
+```
