@@ -76,11 +76,11 @@ Nicht schaltbare Transition:
 
 Nebenläufiges Schalten:
 
-![Nebenläufig](bild_03_petri_nebenläufig.png)
+![Nebenläufig](bild_03_petri_nebenläufig.png)
 
 Deadlock beim Ausleihen von Büchern:
 
-![Deadlock](bild_03_petri_bücher.png)
+![Deadlock](bild_03_petri_bücher.png)
 
 #### Eigenschaften
 * **Lebendig**: Für jedes t gibt es eine erreichbare Markierung, in der t transitionsbereit ist
