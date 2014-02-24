@@ -19,13 +19,13 @@ Explizite Kommunikationsformen:
 **Klassifikation** der Kommunikation in verteilten Systemen:
 
 | | Multiprozessor | Multicomputer | verteiltes System |
-|-| -------------- | ------------- | ----------------- |
-| Konfiguration | nur CPU | CPU, RAM, Netz | kompletter Rechner
-| Peripherie | gemeinsam | gemeinsam, außer HDD | getrennt
-| Ort | gemeinsames gehäuse | gemeinsamer Raum | weltweit
-| Kommunikation | gemeiner RAM | direkte Verbindung | Netzwerk
-| Betriebssystem | gemeinsames BS | getrennt, aber gleicher Typ | getrennt, vielfach unterschiedlich
-| Verwaltung | eine Organisation | eine Organisation | viele Organisationen
+|---|--------------|------------|-----------------|
+|Konfiguration | nur CPU | CPU, RAM, Netz | kompletter Rechner |
+|Peripherie | gemeinsam | gemeinsam, außer HDD | getrennt |
+|Ort | gemeinsames gehäuse | gemeinsamer Raum | weltweit |
+|Kommunikation | gemeiner RAM | direkte Verbindung | Netzwerk |
+|Betriebssystem | gemeinsames BS | getrennt, aber gleicher Typ | getrennt, vielfach unterschiedlich |
+|Verwaltung | eine Organisation | eine Organisation | viele Organisationen |
 
 ```
 send(E: process, m: message)
