@@ -15,7 +15,7 @@
 ## 2. Konzeptionelle Modellierung
 ### Konsitenzbedingungen
 #### Funktionalitätsangaben
-![Funktionalitäten 1](img/funktionalitäten_1.png)
+![Funktionalitäten 1](img/funktionalitaeten_1.png)
 
 Bedeutet:
 * `1` Tutor *nimm* an `1` Übung *teil*
