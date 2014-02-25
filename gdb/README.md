@@ -507,8 +507,41 @@ Z.B. 9 Elemente sortieren, es passen aber nur 3 in den Hauptspeicher
 
 Merge kann z.b. mit Heap/Priority Queue ablaufen
 
-
 ## 9. Transaktionsverwaltung
+**Commit**: Die in einer Transaktion vollzogenen Änderungen werden festgeschrieben.
+
+**Rollback**: Alle Änderungen sollen zurückgesetzt werden.
+
 ### ACID
+#### Atomicity
+Ganze Transaktion wird verbucht, oder nichts davon.
+
+#### Consistency
+Konsistenter Zustand der DB (auch nach Abstürzen etc.)
+
+#### Isolation
+Jede Transaktion hat die DB für sich alleine und wird nicht von parallel laufenden Transaktionen beeinflusst.
+
+#### Durability
+Änderungen erfolgreicher Transaktionen dürfen nie verloren gehen (Logs).
 
 ## 10. Fehlerbehandlung/Recovery & 11. Mehrbenutersynchronisation
+### Recovery
+#### R1
+Lokale Fehler in einer noch nicht festgeschriebenen Transaktion -> Wirkung muss zurückgesetzt werden
+
+#### R2
+Fehler mit Hauptspeicherverlust, absgeschlossene TAs müssen erhalten bleiben
+
+#### R3
+Fehler mit Hauptspeicherverlust, noch nicht abgeschlossene TAs müssen zurückgesetzt werden
+
+#### R4
+Fehler mit Hintergrundspeicherverlust, heranziehen von externen Backups und Logs.
+
+### Mehrbenutzerbetrieb
+* Lost Update: Überschreiben des Updates durch eine parallel laufende 
+* Abhängigkeiten von nicht freigegebenen Änderungen
+* Phantomproblem (Daten werden während der Transaktion extern verändert
+
+Historie muss eindeutig serialisierbar sein!
