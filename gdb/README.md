@@ -138,8 +138,56 @@ WHERE s2.name = 'Fichte'
 	AND s1.matrnr != s2.matrnr
 ```
 
+> Formulieren Sie eine SQL-Anfragen, um die Studenten zu ermitteln,
+die mehr SWS belegt haben als der Durchschnitt. Berucksichtigen Sie dabei auch Total- 
+verweigerer, die gar keine Vorlesungen horen.
 
+```sql
+-- calculate average sws by sum(all_taken_sws)/count(all_students)
+WITH avg_sws as (SELECT sum(sws)*1.0/(SELECT count(matrnr) FROM Studenten) as avg_sws
+		FROM hoeren h, Vorlesungen v
+		WHERE h.vorlnr = v.vorlnr)
+SELECT s.name, s.matrnr, avg(sws)
+FROM Studenten s, hoeren h, Vorlesungen v
+WHERE s.matrnr = h.matrnr
+    AND h.vorlnr = v.vorlnr
+    GROUP BY s.name, s.matrnr
+    HAVING sum(sws) > (SELECT * FROM avg_sws)
+```
 
+> Bestimmen Sie fur alle Studenten eine gewichtete Durchschnittsnote ihrer Prüfungen. Die Gewichtung der einzelnen Prüfungen erfolgt gemäß dem Vorlesungsumfang (SWS).
+
+```sql
+-- pruefen relation mit gewichteter Note pro ergebnis
+WITH noten as (
+	SELECT s.*, v.sws as gewicht, p.note*v.sws*1.0 as note FROM Studenten s, pruefen p, Vorlesungen v WHERE s.matrnr = p.matrnr AND p.vorlnr = v.vorlnr
+)
+-- gruppierung nach Student
+SELECT name, matrnr, sum(note)*1.0/sum(gewicht) as Durschnittsnote
+FROM noten
+GROUP BY name, matrnr
+```
+
+> Welche Studenten haben alle Vorlesungen, die sie haben prüfen lassen, auch tatsächlich
+vorher gehört?
+
+=> Die Anforderung lässt sich umschreiben zu "Es darf keine Vorlesung geben, die geprüft wurde, zu der es aber keinen Eintrag in `hoeren` gibt".
+
+```sql
+-- alle Studenten
+SELECT * FROM Studenten s
+WHERE NOT EXISTS (
+	-- für die es keinen Eintrag in pruefen gibt,
+	SELECT * FROM pruefen p
+	WHERE p.matrnr = s.matrnr
+	AND NOT EXISTS (
+		-- der nicht durch einen Eintrag in höeren belegt wird
+		SELECT * FROM hoeren h
+		WHERE h.matrnr = s.matrnr
+		AND h.vorlnr = p.vorlnr
+	)
+)
+```
 #### Create
 
 ## 5. Datenintegrität
