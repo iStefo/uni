@@ -292,6 +292,7 @@ Beispielrelation:
 * CD -> BEF
 
 Attributhülle von **A**:
+
 Schritt | betrachtete FD | Ergebnis
 --------|----------------|---------
 init    |                | {A}
@@ -307,7 +308,7 @@ Im Beispiel: {A}, {C}, {E}, {F}
 {B} ist nicht einaml ein Superschlüssel, {C, D} wäre ein Superschlüssel aber nicht minimal und deswegen kein Kandidatenschlüssel.
 
 #### Kannonische Überdeckung
-1. FÜr jede FD *Linksreduktion* durchführen
+1. Für jede FD *Linksreduktion* durchführen
 2. Für jede (verbliebene) FD *Rechtsreduktion* durchführen
 3. Ins leere zeigende FDs entfernen
 4. Mit der Vereinigungsregel FDs zusammenfassen
