@@ -116,6 +116,7 @@ Vorgehen relativ analog zum relationalen Tupelkalkül
 ### SQL
 #### Select
 > Finden Sie alle Studenten, die Sokrates aus Vorlesungen kennen
+
 ```sql
 SELECT DISTINCT s.*
 FROM Vorlesungen v, Professoren p, Studenten s, hoeren h
@@ -124,6 +125,20 @@ WHERE p.name = 'Sokrates'
     AND v.vorlNr = h.vorlNr
     AND s.matrNr = h.matrNr
 ```
+
+> Finden Sie die Studenten, die Vorlesungen horen, die auch Fichte hort.
+
+```sql
+SELECT s1.*
+FROM Studenten s1, Studenten s2, hoeren h1, hoeren h2
+WHERE s2.name = 'Fichte'
+	AND s1.matrnr = h1.matrnr
+	AND h1.vorlnr = h2.vorlnr
+    AND h2.matrnr = s2.matrnr
+	AND s1.matrnr != s2.matrnr
+```
+
+
 
 #### Create
 
