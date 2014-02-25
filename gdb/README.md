@@ -228,7 +228,7 @@ create table verheiratet (
 	primary key (Ehegatte1),
 	unique (Ehegatte2)
 );
-``
+```
 
 ## 5. Datenintegrität
 ### Typensystem
