@@ -381,8 +381,8 @@ Bringt ein Relationsschema mit funktionalen Abhängigkeiten in die **3. Normalfo
 	3. Entfernung von FDs der Form `a -> 0`
 	4. Zusammenfassung gleicher linker Seiten
 2. Für jede funktionale Abhängigkeit `a -> b ∈ Fc`
-	* Kreiere ein Relationenschema `Ra` aus den Attributen in `a` und `b`
-	* Ordne `Ra` die FDs zu
+	1. Kreiere ein Relationenschema `Ra` aus den Attributen in `a` und `b`
+	2. Ordne `Ra` die FDs zu
 3. Falls ein erzeugtes Schema einen Kandidatenschlüssel von R bzgl. Fc enthalt, sind wir fertig. Sonst wähle einen Kandidatenschlüssel aus R aus und erzeuge ein Schema mit dem Schlüssel.
 4. Eliminiere diejenischen Schemata `Ra`, die in einem anderen Relationenschema `Ra'` enthalten sind
 
@@ -398,20 +398,115 @@ Bringt ein Relationenschema mit funktionalen Abhängigkeiten in die BCNF, ist *v
 
 ## 7. Physische Datenorganisation
 ### B-Bäume
+> Balancierte Mehrwege-Suchbäume für den Hintergrundspeicher
+
+Ein **B-Baum vom Grad k**:
+1. Jeder Weg von der Wurzel zu einem Blatt hat die gleiche Länge
+2. Jeder Knoten außer der Wurzel hat mindestens k und höchstens 2k Einträge. Die Einträge werden in allen Knoten *sortiert* gehalten
+3. Alle Knoten mit n Einträge, außer den Blättern, haben n + 1 Kinder
+4. Seien S1...Sn die Schlüssel eines Knotens mit n + 1 Kindern, V0...Vn seien die Verweise auf diese Kinder
+	1. V0 weist auf den Teilbaum mit Schlüsseln **kleiner** als S1
+	2. Vi (0 < i < n) weißt auf den Teilbaum, dessen Schlüssel zwischen Si und Si+1 liegen
+	3. Vn weißt auf den Teilbaum mit Schlüsseln **größer** als Sn
+	4. In den Blattknoten sind die Zeiger nicht definiert
+	
+Struktur eines B-Baum Knotens:
+
+![BBaum Knoten](img/bbaum_knoten.png)
+
+Im Hauptspeicher: 
+
+#### Einfügen in einen B-Baum
+1. Suche nach einem Schlüssel, die Suche endet (scheitert) an der Einfügestelle
+2. Füge den Schlüssel dort ein
+3. Ist der Knoten überfüllt, teile ihn
+	1. Legen einen neuen Knoten an und belege ihn mit den Schlüssel, die rechts vom mittleren Eintrag des überfüllten Knotens liegen
+	2. Füge den mittleren Eintrag im Vaterknoten des überfüllten Knotens ein
+	3. Verbinde den Verweis rechts des neuen Eintrags im Vaterknoten mit dem neuen Knoten
 
 ### B+ Bäume
+Daten werden nur noch in den Blättern gespeichert, um den Baum flacher zu halten (breitere Knoten, enthalten nur Referenzschlüssel).
+
+Ein **B+ Baum** vom Typ **(k, k\*)**:
+1. Weg Wurzel-Blatt gleich lang
+2. Jeder Knoten (außer Wurzel und Blätter) hat mindestens k und höchstens 2k Einträge. **Blätter haben mindestens k\* und höchstens 2k\* Einträge**
+3. Jeder Knoten mit n Einträgen, außer den Blättern, hat n + 1 Kinder
+4. Seien R1...Rn die Referenzschlüssel eines inneren Knotens mit n + 1 Kindern. Seien V0...Vn die Verweise auf diese Kinder
+	1. V0 verweist auf den Teilbaum mit Schlüsseln **kleiner gleich** R1
+	2. Vi (0 < i < n) verweist auf den Teilbaum, dessen Schlüssel zwischen Ri und Ri+1 liegen (**einschließlich Ri+1**)
+	3. Vn verweist auf den Teilbaum mit Schlüsseln **größer** als Rn
 
 ### Hashing
+#### Statisches Hashen
+* A priori Allokation des Speichers (nachträgliches Vergrößern ist teuer da rehashing der Daten)
+* Erweiterbares Hashing
+	* Zusätzlich Indirektion über ein Directory, enthält Zeiger auf ein *Hash-Bucket*
+	* Zugriff auf das Directory über binären Hashcode
+* Bitstring muss lang genug sein, um alle Objekte auf Buckets abbilden zu können
+* Anfangs wird nur ein kurzer Präfix des Hashwerts benötigt
+* Mit Wachsen der Hashtabelle wird ein längerer Präfix benötigt
+
+**Lokale Tiefe**: Wie viele bits des Hashwerts werden benötigt, um ein Bucket zu identifizieren?
 
 ### TIDs (Tupel IDs)
 
 ## 8. Anfragebearbeitung
 ### Logische Optimierung
+Kanonische Übersetzung von SQL in Relationale **Algebrabäume**.
+
+#### Äquivalenzerhaltende Transformationsregeln
+1. Aufbrechen von Kunjunktionen im Selektionsprädikat
+2. Selektion `σ` ist kommutativ
+3. Kaskadierung von Projektion `π`: Nur das äußerste zählt
+4. Vertauschen von Selektion und Projektion (falls keine in der Projektion wegfallenden Attribute benutzt werden)
+5. `×`, `∪` und `∩` sind kommutativ
+6. Vertauschen der Reihenfolge von `σ` mit `⨝` bei entsprechendem Prädikat
+7. Vertauschen der Reihenfolge von `π` mit `⨝`
+...
+
+#### Anwendung
+1. Zerlegen von konjuktiven Prädikaten in Kaskaden von `σ`-Operationen
+2. Abwärtspropagieren von Selektionsoperationen
+3. Vertauschen der Blattknoten um kleine Zwischenergebnisse zu erzielen
+4. Kreuzprodukt und Selektion wenn möglich zu Join machen
+5. Mögliches Zusammenlegen von Operationen
 
 ### Join ALgorithmen
-(Vor- und Nachteile kennen)
+#### Nested Loop Join
+Findet mit Quadratischer Laufzeit den Join-Partner
+
+```
+foreach r in R
+	foreach s in S
+		if s.B = r.A then Rest := Res + (r . s)
+```
+
+#### Index Nested Loop Join
+Liest in jedem Durchlauf von R nur die in S qualifizierenden Tupel. Erfordert Index auf B!
+
+```
+foreach r in R
+	foreach s in S[B=r.A]
+		Rest := Res + (r . s)
+```
+
+#### Sort-Merge Join
+Erfordert 2 Sortierungen: R nach A, S nach B. Durchlaufen der sortierten Liste von S für jedes R so lange wie r.A = s.B. Sehr effizient, aber erfordert Sortierung.
+
+#### Hash-Join
+Abbildung von R und S mit der gleichen Hashfunktion auf Hash-Buckets. Wird vom Sort-Merge Join nur bei vorsortierten Mengen geschlagen.
 
 ### Externes Sortieren
+Z.B. 9 Elemente sortieren, es passen aber nur 3 in den Hauptspeicher
+
+1. Sort-Phase
+2. Herausgreifen von 3er Gruppen, Sortieren derer und als jeweils einen *Run* nacheinander wieder ablegen
+3. Wenn Abgeschlossen in die Merge Phase übergehen
+4. Kombinieren der ersten Elemente eines jeden Runs, Kleinstes wird weggeschrieben
+5. Nachschub aus dem Run nehmen, aus dem das weggeschriebene Element war
+
+Merge kann z.b. mit Heap/Priority Queue ablaufen
+
 
 ## 9. Transaktionsverwaltung
 ### ACID
