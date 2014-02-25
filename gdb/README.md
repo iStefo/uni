@@ -92,9 +92,38 @@ Siehe *Left Semi Join*
 Es bleiben nur Tupel aus der **linken** Argumentrelation erhalten, die **kein** Gegenstück finden. Definiert als `L ▷ R = L - (L ⋉ R)`
 
 ### Tupel-/Domänenkalkül
+> Finden Sie alle Studenten, die alle Vorlesungen gehort haben, die von Sokrates gelesen
+wurden.
+
+#### Relationaler Algebra
+1. Wir ermitteln alle von Sokrates gelesenen Vorlesungen
+2. Durch Anwendung des Divisionsoperators bekommen wir die Matrikelnummern der Studenten, die alle von Sokrates gehaltenen Vorlesungen gehört haben
+3. Aus Studenten ermitteln wir zusätzlich die Namen der Studenten
+
+![Relationale Algebra](img/relationale_algebra.png)
+
+#### Tupelkalkül
+1. Wie ermitteln mittels des **Allquantors** alle Vorlesungen, die von Sokrates gehört werden
+2. Wir fordern, dass ein Student alle diese Vorlesungen gehört hat (**Implikation** und **Existenzquantor**)
+
+![Tupelkalkül](img/tupelkalkuel.png)
+
+#### Domänenkalkül
+Vorgehen relativ analog zum relationalen Tupelkalkül
+
+![Domänenkalkül](img/domaenenkalkuel.png);
 
 ### SQL
 #### Select
+> Finden Sie alle Studenten, die Sokrates aus Vorlesungen kennen
+```sql
+SELECT DISTINCT s.*
+FROM Vorlesungen v, Professoren p, Studenten s, hoeren h
+WHERE p.name = 'Sokrates'
+	AND v.gelesenVon = p.persNr
+    AND v.vorlNr = h.vorlNr
+    AND s.matrNr = h.matrNr
+```
 
 #### Create
 
