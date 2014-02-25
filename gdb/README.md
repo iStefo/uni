@@ -170,7 +170,6 @@ SELECT name, matrnr, sum(note)*1.0/sum(gewicht) as Durschnittsnote
 FROM noten
 GROUP BY name, matrnr
 ```
-
 > Welche Studenten haben alle Vorlesungen, die sie haben prüfen lassen, auch tatsächlich
 vorher gehört?
 
@@ -191,20 +190,153 @@ WHERE NOT EXISTS (
 	)
 )
 ```
+
+> Ermitteln Sie den Männeranteil an den verschiedenen Fakultäten in SQL!
+
+```sql
+WITH FakTotal AS (
+	SELECT FakName, COUNT (*) as total
+	FROM StudentenGF
+	GROUP BY FakName),
+FakMaenner AS (
+	SELECT FakName, COUNT (*) as maenner
+	FROM StudentenGF
+	WHERE geschlecht = 'M'
+	GROUP BY FakName)
+SELECT FakTotal.FakName,
+	(CASE WHEN maenner IS NULL THEN 0 ELSE maenner END)/(total*1.0)
+FROM FakTotal
+LEFT JOIN FakMaenner ON FakTotal.FakName = FakMaenner.FakName
+```
+
 #### Create
+![Schema Menschen](img/schema_menschen.png)
+
+```sql
+create table Menschen (
+	SozVNr varchar (30) not null primary key ,
+	Name varchar (30)
+);
+create table Eltern_von (
+	MutterVater varchar (30) not null references Menschen,
+	Kind varchar (30) not null references Menschen,
+	primary key (MutterVater, Kind)
+);
+create table verheiratet (
+	Ehegatte1 varchar (30) not null references Menschen on delete cascade,
+	Ehegatte2 varchar (30) not null references Menschen on delete cascade,
+	primary key (Ehegatte1),
+	unique (Ehegatte2)
+);
+``
 
 ## 5. Datenintegrität
 ### Typensystem
 
-### Primärschlüssel
+### Schlüssel
+#### Superschlüssel
+`a ⊆ R` ist ein Superschlüssel, wenn gilt: `a -> R`
+
+#### Kandidatenschlüssel
+`a ⊆ R` ist ein Kandidatenschlüssel, wenn gilt: `a ->* R`
+
+Dabei bedeutet `a ->* R`: `R` ist **voll funktional abhängig** von `a`, also `a -> R` und `a` **ist minimal** (kann nicht reduziert werden, ohne dass die Abhängigkeit von `R` verloren geht).
+
+#### In SQL
+* **Kandidatenschlüssel**: `unique`
+* **Primärschlüssel**: `primary key`
+* **Fremdschlüssel**: `foreign key`
 
 ### Trigger
-Verstehen
+Beispiel: Professoren können nut im Rang *raufgestuft* werden, aber nicht *heruntergestuft* (Oracle Syntax):
+
+```sql
+create trigger keine Degradierung
+before update on Professoren
+for each row
+when (old.Rang is not null)
+begin
+	if :old.Rang = 'C3' and :new.Rang = 'C2' then
+		:new.Rang := 'C3';
+	end if;
+	if :old.Rang = 'C4' then
+		:new.Rang := 'C4'
+	end if;
+	if :new.Rang is null then
+		:new.Rang := :old.Rang;
+	end if;
+end
+```
 
 ### Check Constraints
-Verstehen
+Beispiele:
+
+```sql
+create table Studenten (
+	-- ...
+	Semester integer check Semester between 1 and 13
+);
+create table Professoren (
+	-- ...
+	Rang character(2) (Rang in ('C2', 'C3', 'C4'))
+);
+```
 
 ## 6. Relationale Entwurfstheorie
+#### Attributhülle
+Beispielrelation:
+* A -> BC
+* C -> DA
+* E -> ABC
+* F -> CD
+* CD -> BEF
+
+Attributhülle von **A**:
+Schritt | betrachtete FD | Ergebnis
+--------|----------------|---------
+init    |                | {A}
+1.      | A -> BC        | {A, B, C}
+2.      | C -> DA        | {A, B, C, D}
+3.      | CD -> BEF      | {A, B, C, D, E, F}
+
+#### Kandidatenschlüssel
+Im Beispiel: {A}, {C}, {E}, {F}
+
+{A} ist ein Superschlüssel und außerdem minimal, also auch ein **Kandidatenschlüssel**. Da aus {C} und {E} direkt A folgt, sind es ebenso Superschlüssel und (da sie einelementig sind) auch Kandidatenschlüssel. Aus {F} kann C und somit A gefolgert werden, also ist {F} auch ein Kandidatenschlüssel.
+
+{B} ist nicht einaml ein Superschlüssel, {C, D} wäre ein Superschlüssel aber nicht minimal und deswegen kein Kandidatenschlüssel.
+
+#### Kannonische Überdeckung
+1. FÜr jede FD *Linksreduktion* durchführen
+2. Für jede (verbliebene) FD *Rechtsreduktion* durchführen
+3. Ins leere zeigende FDs entfernen
+4. Mit der Vereinigungsregel FDs zusammenfassen
+
+Beispiel von oben:
+
+1. Linksreduktion (Prüfe für jedes Attribut links, ob es überflüssig ist)
+
+* A -> BC
+* C -> DA
+* E -> ABC
+* F -> CD
+* C -> BEF	(CD -> BEF, aber C führt schon auf D, also ist es links überflüssig)
+
+2. Rechtsreduktion (Prüfe für jedes Attribut rechts, ob es durch die anderen Attriute rechts erreichbar wäre)
+
+* A -> C	(A -> BC, aber C führt zu B, also ist B rechts überflüssig)
+* C -> 0	(C -> DA, aber C -> BEF -> D, A, also sind beide rechts überflüssig)
+* E -> A	(E -> ABC, aber A -> C -> B, also sind B, C rechts überflüssig)
+* F -> CD	(nicht verändert, die Attribute können nicht mehr anders erreicht werden)
+* C -> BEF	(nicht verändert, keins der Attribute kommt rechts noch einmal vor)
+
+3. Ins leere zeigende FDs entfernen
+
+* A -> C
+* E -> A
+* F -> CD
+* C -> BEF
+
 ### Normalformen
 #### 1. Normalform
 
