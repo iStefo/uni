@@ -340,16 +340,61 @@ Beispiel von oben:
 
 ### Normalformen
 #### 1. Normalform
+* Nur Atomare Domänen (nicht "Arrays" als Werte für ein Feld)
 
 #### 2. Normalform
+* Jedes Nichtschlüssel-Attribut `a ⊆ R` muss **voll funktional abhängig** sein von jedem **Kandidatenschlüssel**
+
+Gegenbeispiel:
+
+*MatrNr* | *VorlNr* | Name | Semester
+---------|----------|------|---------
+26120    | 5001     | Fichte | 10
+28106    | 5041     | Carnap | 3
+28106    | 5216     | Carnap | 3
+
+Es gelten `MatrNr -> Name` und `MatrNr -> Semester`, aber keine Abhängigkeit von `VorlNr`.
+
+Dies führt zu *Einfügeanomalien* (Studenten, die keine Vorlesungen hören?) *Updateanomalien* (Carnap ins 4. Semester) und *Löschanomalien* (Wenn Fichte die letzte Vorlesung absagt?).
+
+Lösung: Zerlegung in 2 Relationen: `hoeren: {[MatrNr, VorlNr]}` und `Studenten: {[MatrNr, Name, Semester]}`
 
 #### 3. Normalform
+Für jede FD der Form `a -> B` muss mindestens eine der 3 Bedingungen gelten:
+* `B ∈ a` -  Die FD ist trivial
+* Das Attribut `B` ist in einem Kandidatenschlüssel von `R` enthalten (B ist prim)
+* `a` ist Superschlüssel von `R`
 
 #### Boyce-Kott Normalform
+Selbe Regeln wie bei 3. Normalform, außer dem 2. Also:
+* `B ∈ a` -  Die FD ist trivial
+* `a` ist Superschlüssel von `R`
+
+Jede Realtion ist *verlustlos* in BCNF-Relationen *zerlegbar*, die *Abhängigkeitserhaltung* ist *nicht immer gewährleistet*.
 
 ### Synthesealgorithmus
+Bringt ein Relationsschema mit funktionalen Abhängigkeiten in die **3. Normalform**, ist *verlustlos* und *abhängigkeitserhaltend*.
+
+1. Bestimmung der kanonischen Überdeckung Fc zu F:
+	1. Linksreduktion
+	2. Rechtsreduktion
+	3. Entfernung von FDs der Form `a -> 0`
+	4. Zusammenfassung gleicher linker Seiten
+2. Für jede funktionale Abhängigkeit `a -> b ∈ Fc`
+	* Kreiere ein Relationenschema `Ra` aus den Attributen in `a` und `b`
+	* Ordne `Ra` die FDs zu
+3. Falls ein erzeugtes Schema einen Kandidatenschlüssel von R bzgl. Fc enthalt, sind wir fertig. Sonst wähle einen Kandidatenschlüssel aus R aus und erzeuge ein Schema mit dem Schlüssel.
+4. Eliminiere diejenischen Schemata `Ra`, die in einem anderen Relationenschema `Ra'` enthalten sind
 
 ### Dekompositionsalgorithmus
+Bringt ein Relationenschema mit funktionalen Abhängigkeiten in die BCNF, ist *verlustlos* aber *nicht immer abhängigkeitserhaltend*.
+
+1. Starte mit `Z = {R}`
+2. Solange es noch ein Relationenschema `Ri` in `Z` gibt, das nicht in BCNF ist:
+	* Es gibt also eine nicht-triviale funktionale Abhängigkeit (`a -> b`) mit `a ∩ b = 0`, `¬(a -> Ri)`
+	* Finde eine solche FD (möglichst so wählen, dass `b` alle von `a` funktional abhängigen Attribute enthält, damit der Dekomp.alg. schnell terminiert)
+3. Zerlege `Ri` in `Ri1 := a ∪ b` und `Ri2 = Ri - b`
+4. Entferne `Ri` aus `Z` und füge `Ri1` und `Ri2` ein 
 
 ## 7. Physische Datenorganisation
 ### B-Bäume
