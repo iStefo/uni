@@ -160,7 +160,10 @@ WHERE s.matrnr = h.matrnr
 ```sql
 -- pruefen relation mit gewichteter Note pro ergebnis
 WITH noten as (
-	SELECT s.*, v.sws as gewicht, p.note*v.sws*1.0 as note FROM Studenten s, pruefen p, Vorlesungen v WHERE s.matrnr = p.matrnr AND p.vorlnr = v.vorlnr
+	SELECT s.*, v.sws as gewicht, p.note*v.sws*1.0 as note
+	FROM Studenten s, pruefen p, Vorlesungen v
+	WHERE s.matrnr = p.matrnr
+	AND p.vorlnr = v.vorlnr
 )
 -- gruppierung nach Student
 SELECT name, matrnr, sum(note)*1.0/sum(gewicht) as Durschnittsnote
