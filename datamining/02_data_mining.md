@@ -1,5 +1,5 @@
 # Data Mining
-## Chapter 1: Data Mining
+## Chapter 2: Data Mining
 ### Definitions
 #### What is Data?
 Collection of data **objects** (rows) and their **attributes** (columns). Attributs can be mapped to different attribute values (e.g. different units).
@@ -77,9 +77,10 @@ Issue when merging heterogeous sources, avoid accidentally combining similar but
 	* Sampling with replacement (same object can be picked up more than once)
 	* Stratified sampling (data into partitions, random samples from each)
 	* Gets harder for higher dimensionality!
-* **Dimensionality Reduction**
-	* Transform the x into p new variables y that are uncorrelated
-	* Find the eigenvectors of covariance matrix
+
+#### Dimensionality Reduction
+Transform the x into p new variables y that are uncorrelated (by finding the eigenvectors of covariance matrix)
+
 * **Subset Selection**
 	* Redundant features (purchase price & sales tax paid)
 	* Irrelevant features
@@ -92,7 +93,10 @@ Issue when merging heterogeous sources, avoid accidentally combining similar but
 	* Min-max normalization (e.g. [12,000, 98,000] -> [0,1], (73,000-12,000)/(98,000-12,000))
 	* Z-score normalization `v' = (v - mean)/stdev`
 	* Decimal Scaling `v' = v / 10^j`
-#### Similatory
+	
+### Similarity
 **Similatiry** (often in [0,1]) & **Dissimilarity** (minimum is often 0).
 
 ![02_similarity](img/02_similarity.png)
+
+#### Euclidian
