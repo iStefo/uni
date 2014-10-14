@@ -99,4 +99,41 @@ Transform the x into p new variables y that are uncorrelated (by finding the eig
 
 ![02_similarity](img/02_similarity.png)
 
-#### Euclidian
+#### Euclidean
+![02_euclidean](img/02_euclidean.png)
+
+#### Minkowski Distance
+![02_minkowski](img/02_minkowski.png)
+
+* r = 1
+	* City Block (Manhattan, L1 norm) distance, **Hamming distance**
+* r = 2
+	* Euclidean distance (L2 norm)
+* r -> ∞
+	* "Supremum" distance (Lmax norm), maximum difference between any component of the 2 vectors
+
+#### Common Properties of a Distance
+Requirements to be a **metric**:
+
+1. **Positive Definiteness**
+	* d(p, q) ≥ 0 ∀ p, q
+	* d(p, q) = 0 iff p = q
+2. **Symmetry**
+	* d(p, q) = d(q, p) ∀ p, q
+3. **Triangle Inequality**
+	* d(p, r) ≤ d(p, q) + d(q, r) ∀ p, q, r
+	
+#### Common Properties of a Similarity
+1. **Self-Similarity**
+	* s(p, q) = 1 (or max. similarity) only if p = q
+2. **Symmetry**
+	* s(p, q) = s(q, p) ∀ p, q
+
+#### Correlation
+Measure of linear relationship between attributes of objects in the range of -1 and 1.
+
+### Density
+* **Euclidean density**
+	* Number of points per unit volume, cell based or center based
+* **Probability density**
+* **Graph based density**
