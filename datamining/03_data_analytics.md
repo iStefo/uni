@@ -7,6 +7,7 @@
 	* John Tukey
 	* Focus on visualization
 	* Clustering and anomaly detection as exploratory techniques (in DM, they are major areas of interest instead)
+
 ### Summary Statistics
 ##### Frequency
 Percentage of time a value occurs in the data set. (E.g. "male" and "female" occur about 50% of the time).
