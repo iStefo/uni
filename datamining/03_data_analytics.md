@@ -55,7 +55,7 @@ Elimination or **de-emphasis** of certain objects and attributes. Subset of attr
 * Additional attributes through size, shape and color
 * Array of scatter plots to compare several pairs of attributes
 
-[!03_scatter_plot_array](img/03_scatter_plot_array.png)
+![03_scatter_plot_array](img/03_scatter_plot_array.png)
 
 ##### Contour Plots
 * Partition continuous data into regions of similar values
