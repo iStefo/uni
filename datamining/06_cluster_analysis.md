@@ -68,7 +68,7 @@ Finds clusters to minimize or maximize an objective function. (NP-Hard)
 #### Evaluationg K-means Clusters
 * Minimize Sum of Squared Error (SSE)
 * Error: distance to the nearest cluster for each point
-* ![06_sse](img/06_ssw.png)
+* ![06_sse](img/06_sse.png)
 * Good clustering with small K can have lower SSE than a poor clustering with higher K
 * K should be higher then the number of real clusters (otherwise probability for selecting an initial point in each cluster is very low)
 	* Sample and use hierarchical clustering
