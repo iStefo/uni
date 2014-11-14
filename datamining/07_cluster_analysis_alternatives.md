@@ -37,6 +37,30 @@
 * Nearest neighbor might belong to same class as the point itself (less impact of noise)
 
 ### Chameleon
-(p. 22)
+* Adapt to characteristics of data set to find natural clusters
+* Dynamic model for similarity between clusters:
+	* **Relative closeness** (absolute closeness normalized by internal closeness)
+	* **Relative interconnectivity** (absolute interconnectivity of two clusters normalized by the internal connectivity of cluster)
+	* Combine clusters that share certain properties
+	* Merging preserves self-similarity
+	* Works with spatial data sets (density, shapes, difference in densities, existance of special artifacts)
+	
+#### Steps
+* Preprocessing: Present data by a k-nearest-neighbor graph
+* Phase 1: Multilevel graph partitioning algorithm to find large number of clusters
+* Phase 2: Hierarchical Agglomerative Clustering to merge sub-clusters
 
-### Cluster Validity
+#### Shared Near Neighbor Approach
+**SNN graph**: weight of edge = number of shared neighbors between vertices (when they are connected)
+
+1. Compute the similarity matrix
+2. Sparsify the smiliraity matrix by keeping only k most smiliar neighbors
+3. Construct the shared neares neighbor graph from sparsified matrix
+4. Find SNN density of each Point (using Eps, count the number of nodes with similarity > Eps)
+5. Find the core points (using MinPts, find points with SNN density > MinPts)
+6. Form clusters from core points (two points are in one cluster if distance < Eps)
+7. Discard all noise points
+8. Assign all non-noise, non-core points to cluster
+
+* Does not cluster all points
+* High complexity (`O(N^2)`)
