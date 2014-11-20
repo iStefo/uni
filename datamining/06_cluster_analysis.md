@@ -63,7 +63,7 @@ Finds clusters to minimize or maximize an objective function. (NP-Hard)
 	* Form K clusters bei assigning all points to the closest centroid
 	* Recompute the centroid of each cluster
 
-* Komplexity: `O(n*K*I*d)` (n = |Points|, K = |Clusters|, I = |Iteratrions|, d = |attributes|)
+* Komplexity: `O(n*K*I*d)` (n = |Points|, K = |Clusters|, I = |Iterations|, d = |attributes|)
 
 #### Evaluationg K-means Clusters
 * Minimize Sum of Squared Error (SSE)
