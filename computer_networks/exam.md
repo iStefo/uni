@@ -69,3 +69,55 @@ Best Effort Traffic: All users obtain unspecified variable bit rate and delivery
 	* Lower and upper limit on acceptable performance
 	* Audio and Video, Telephones with high delay impair human interaction
 	* Hard real-time applications (control applications)
+	
+## Traffic Management Techniques
+* Packet classficiation
+	* Scheduling
+	* Traffic Policing and Shaping
+* Connection admission Control
+
+### Connection Admission Control (CAC)
+* Connection request inclused QoS requirements
+* If request is accepted, network allocates resources to ensure QoS delivered as long as source conforms to contract
+* Constant-bit-rate (**CBR**) admission control: Allocate bandwidth needed
+* Variable-bit-rate (**VBR**): Connections are bursty	* Peak-rate admission control: Reserve peak rate of bandwidth.
+		* Simple, works well for small number. No Delay and loss
+		* Wastes bandwidth, only few connections possible
+	* Worst-case admission control: Allocate by average rate and bust size
+		* Use less bandwidth than peak, can achieve end-to-end delay guarantee
+		* Loss at peaks, implementation complexity
+	* Admission control with statistical guarantees
+		* When number of connection increases, probability that multiple sources send a burst decreases
+		* Buffers to make probability of loss low
+		* "OFF" and "ON" exponentially distributed with `1/α` and `1/β` mean
+		* Probability of "ON": `α/(α+β)`
+		* Link Capacity `Nα/(α+β) < C < N`
+	* Measurement-based admission control
+		* Measure real average, user tells peak load. If peak + average < capacity, admit.
+		
+## Traffic Policing and Shaping
+**Traffic shaping**: Alter traffic characteristics of the connection to ensure negotiated bandwidth parameters.
+**Traffic policing**: Monitor traffic for conformity with a traffic contract and drop traffic if required.
+
+### Token Bucket Algorithm
+Bucket receives one token every `1/r` seconds, bucket can hold at most `b` tokens, every time a packet arrives `N` token (e.g. number of bytes) are withdrawn. Without remaining tokens, pakcets get dropped.
+
+**Sustained rate** is `r` tokens/second. Bucket is initialized full, i.e. with `b` tokens. Number of data units over any interval `t` is `B(t) = r*t + b`.
+
+Variation: When bucket is empty, packages get queued instead of dismissed.
+
+## Traffic Scheduling
+Deciding service order & managing queue and deciding which packets should be transmitted or dropped.
+
+Scheduling give different users different QoS to provide fairness among different users.
+
+#### Max-min Fairness
+Each flow receives no more than what it wants, the excess is equally shared.
+
+#### Scheduling Disciplines
+* First Come First Serve: Guarantees no fair order
+* Round Robin: Process incomming queues with equal shares (leaves empty timeslots for empty queues)
+* Priority Scheduling: Packet served only if no packets with higher priority exist (surge in high priority can cause low priority queue to saturate)
+* Weighted Round Robin: Serve packet from each non-empty queue, multiplied according to weights (normalized to integer values)
+* Weighted Fair Queuing (WFQ) Max-min: Flows get resource share according to normalized weight. Flows with unsatisfied demands obtain free resources in proportion to their weights (un-normalized)
+* Generalized Processor Sharing: Own queue for each flow, serve in turns. But: not fair since packets have different sizes
