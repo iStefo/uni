@@ -260,6 +260,65 @@ Loss of an employee for any reason.
 * Functional turnover: The good people are staying
 * Dysfunctional turnover: The good people are leaving
 
+## Motivation
+The set of forces that initiates, directs and makes people persist in their efforts to accomplish a goal.
+
+Job Performance = Motivation * Ability * Situational Constraints
+
+### Need Satisfaction
+* Needs: the physical or psychological requirements that must be met to ensure survival and well-being
+* People are motivated by unmet needs
+* Maslow: Needs are arranged in a **hierarchy** from low to high
+* Alderfer: People can be motivated by **more than one need at a time**
+* McClelland: Degree which needs motivate varies between persons
+* Relative importants of needs may change over time
+* Difficult to predict which higher-order needs will motivate employees' behavior
+
+### Rewards
+* **Extrinsic** Rewards: Tangible and visible to others, don't motivate very strong
+* **Intrinsic** Rewards: Natural rewards associated with performing a task
+
+### Equity Theory
+People will be motivated at work when they **perceive** that they are being treated fairly. Stresses the importance of perceptions.
+
+* Inputs: What the employee gives (time, loyalty, skill)
+* Outcomes: Positive and negative consequences (salary, praise, thanks)
+* Referents: People and positions to compare yourself to
+
+* Underrewarded
+* Overredwarded
+
+#### Reacting to Inequity
+* Decreasing or withholding inputs
+* Increasing outcomes
+* Rationalize or distort inputs to outcomes
+* Changing the referent
+* Employees may leave
+
+### Expectancy
+People will be motivated to the extent to which they believe that their efforts lead to good performance and that good performance will be rewarded attractively.
+
+Motivation = Velence * Expectancy * Instrumentality
+
+* Systematically gather information about what employees want from their jobs
+* Link rewards to individual performance in a clear way
+
+### Reinforcement Theory
+* Positive reinforcement: add reward to increase behavior
+* Negative reinforcement: remove punishment to increase behavior
+* Positive punishment: Add punishment to decrease behavior
+* Negative punishment: remove reward to decrease behavior
+
+Extinction: using reinforcement until behavior is not shown anymore.
+
+### Goal-Setting Theory
+People will be motivated to the extent that they accept specific, challenging goals and receive feedback that indicate their progress.
+
+* Goal specificity
+* Goal difficulty
+* Goal acceptance
+* Performance feedback
+
 ## Misc.
 ### Realistic Job Previews
 Early stage of personell selection, provide information on both positive and negative aspects of the job. Employee enters contract with their eyes open, knowing not only what the organization will provide but also what is expected from him.
