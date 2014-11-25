@@ -319,6 +319,79 @@ People will be motivated to the extent that they accept specific, challenging go
 * Goal acceptance
 * Performance feedback
 
+## Leadership
+Opne eprson influencing another to willingly work toward a predetermined objective. Effective: a balance of traits and skills, leadership styles or beavhiors right for a particular situation.
+
+* Planning: Choose appropriate goals and courses of action to achieve them
+* Organizing: Establish task and authority relationships
+* Leading: Motivate, coordinate and energize individuals to work together
+* Controlling: Establish accurate measuring and monitoring systems to evaluate the organization
+
+* Leaders: Vision and direction, align employees, inspire and motivate
+* Managers: Plan and budget, organize, control
+
+### Individual Power
+* **Position Power**
+	* Legitimate power (derived from job position)
+	* Reward power (control of rewards and benefits)
+	* Coercive power (dependent on fear, suppression)
+	* Information power
+* **Personal Power**
+	* Rational persuasion
+	* Referent power (aquired from being will liked or respected)
+	* Expert power (ability to influence based on expertise)
+
+### Providing a Vision
+* Mission Statement
+* Thinking like a leader (Identify what is happening, Account for what is happening, Formulate Leader Actions)
+
+### Leadership styles
+* Fiedler's Contingency Leadership Styles. Contingecy factors:
+	 * Leader-Member realtion: good/poor
+	 * Task Structure: high/low
+	 * Position Power: strong/weak
+* Hersey & Blanchard's Situational Leadership Styles: most effective style defpends on the extent to which followers require guidance, direction and emotional support
+
+1. **Telling**
+	* High task, low relationship focus
+	* Provide specific instructions and closely supervises performance
+	* Good for early stage of work employee
+2. **Selling**
+	* High task, high relationship focus
+	* Explain directions and praise appropriate behaviour
+	* Good for improving abilities but failing drive epmloyee
+3. **Participating**
+	* Low task, high relationship focus
+	* Make decisions together
+	* Good for high ability but lacking drive
+4. **Delegating**
+	* Low task, low relationship focus
+	* Turn over task accmomplishment to follower
+	* Good for both high level of ability and drive
+
+## Change
+### Sources and Effects of Change
+* Usually factors outside the company
+* Required for survival
+* Changes implemented under crisis are highly risky
+
+### Resisting Change
+* Lack of information or honest disagreement over the facts concerning change
+* Personal and emotional fear of loss of job, relationships, and/or status
+* Personality traits: poor self-image, low tolerance for ambiguity and risk
+* Change creates competing commitments
+
+### Adapting to Change (Kurt Lewin)
+1. **Unfreezing** (Explain, reduce forces for status quo, present problem or event to get people recognize need for change)
+2. **Moving** (Train, schedule, actually altering the behaviors, values and attitudes)
+3. **Refreezing** (Reward, prevent return to old system by instituting new procedures)
+
+### Areas of Change
+* Firm's strategy
+* Technological Change (the way products are created and marketed)
+* Structural Change (organization structure)
+* Cultural Change (Change basic values amployees share)
+
 ## Misc.
 ### Realistic Job Previews
 Early stage of personell selection, provide information on both positive and negative aspects of the job. Employee enters contract with their eyes open, knowing not only what the organization will provide but also what is expected from him.
@@ -355,20 +428,3 @@ RJPs prevent a high turnover rate for new hires.
 	* Psychological: apology, show interest
 	* Tangible: give small token
 	
-## Change
-### Resisting Change
-* Lack of information or honest disagreement over the facts concerning change
-* Personal and emotional fear of loss of job, relationships, and/or status
-* Personality traits: poor self-image, low tolerance for ambiguity and risk
-* Change creates competing commitments
-
-### Adapting to Change (Kurt Lewin)
-1. Unfreezing (Explain, reduce forces for status quo, present problem or event to get people recognize need for change)
-2. Moving (Train, schedule, actually altering the behaviors, values and attitudes)
-3. Refreezing (Reward, prevent return to old system by instituting new procedures)
-
-### Areas of Change
-* Firm's strategy
-* Technological Change (the way products are created and marketed)
-* Structural Change (organization structure)
-* Cultural Change (Change basic values amployees share)
