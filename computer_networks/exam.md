@@ -10,7 +10,7 @@
 * `d_i = (1 - u)*d_{i-1} + u*(r_i - t_i)`
 * `u`: fixed constant (e.g. 0.01)
 
-### Forward Errr Correction
+### Forward Error Correction
 * Simple scheme
 	* for n chunks, send n+1 with one parity chunk
 	* larger n: less bandwidth waste, longer playout delay, higher probablity that 2 chunks get lost
@@ -32,6 +32,9 @@
 	* Source of RTP Stream
 
 ### Session Initiation Protocol
+* Call Setup (Codec negotiation)
+* Get real IP from callee ID
+* Call management (add streams, cancel call)
 
 ## Quality of Service
 ### Measures
@@ -83,7 +86,7 @@ Best Effort Traffic: All users obtain unspecified variable bit rate and delivery
 * Variable-bit-rate (**VBR**): Connections are bursty	* Peak-rate admission control: Reserve peak rate of bandwidth.
 		* Simple, works well for small number. No Delay and loss
 		* Wastes bandwidth, only few connections possible
-	* Worst-case admission control: Allocate by average rate and bust size
+	* Worst-case admission control: Allocate by average rate and burst size
 		* Use less bandwidth than peak, can achieve end-to-end delay guarantee
 		* Loss at peaks, implementation complexity
 	* Admission control with statistical guarantees

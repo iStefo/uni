@@ -1,4 +1,3 @@
-# HRM
 ## Entrepreneurship
 ### What is Entrepreneurship
 Human, creative act that builds something of value. It is the pursuit of opportunity regardless of resources at hand. Requires vision and passion, commitment to lead and willingness to take calculated risks.
@@ -51,6 +50,9 @@ The ability to think creatively about, analyze and understand complicated and ab
 * Bargaining power of suppliers (*Market of Inputs*)
 * Intensity of competitive rivalry (Advertising expenses, advantage through innovation)
 
+### Competitive Advantage
+Superiority by an organization when it can provide the same value at a lower price or when it can charge more money for greater value through differentiation.
+
 ## Management
 * Getting work done through others with a minimum of effort, waste or expense (Efficiency)
 * Effectiveness: accomplish tasks that help fulfull organizational objectives
@@ -94,6 +96,12 @@ The ability to think creatively about, analyze and understand complicated and ab
 	* Entrepreneur (adapt themselves and subordinates to change)
 	* Disturbance handler
 	* Resource allocator
+	
+#### Management Skills
+* **Technical Skills**: Important for Team Leaders and First-Line Managers
+* **Human Skills**: Important for everyone!
+* **Conceptual Skills**: Especially important for Top and Middle Manangers
+* **Motivation to Manage**: Especially important for Top and Middle Managers
 	
 ### Mistakes
 * Insensitive to others, cold, aloof and arrogant
@@ -154,6 +162,8 @@ Social Responsibility: Role of businesses in helping to cultivate and maintain h
 ## Managing Teams
 ### Autonomy
 Degree to which workers have the discretion, freedom and independence to decide how and when to accomplish their jobs. (Higher for more self-designed teams)
+
+Self-managed teams have **leadership within the team**, team member **roles are interchangeable**, they have a **flexible task design** and are usually **multiskilled**.
 
 ### Social Loafing
 When people exert less effort to achieve a goal when they work in a group.
@@ -222,6 +232,7 @@ Compare % of hiring rates amongst men and women. If smaller is less than 80% of 
 * Background checks: Verify accuary of information applicants provide about themselves
 * Employment reference
 * Selection tests: Specific ability tests, cignitive ability tests, biographical data, work sample tests, assessment centers
+* **Staffing**: Selection and Training of individuals for specific job functions
 
 #### Interviews
 * Unstructured (Interviwer can ask whatever he wants, hard to compare)
@@ -330,6 +341,11 @@ Opne eprson influencing another to willingly work toward a predetermined objecti
 * Leaders: Vision and direction, align employees, inspire and motivate
 * Managers: Plan and budget, organize, control
 
+### Foundation
+* **Power** (position and individual power)
+* **Traits** (unchanging characteristics that predispose a particular way)
+* **Behaviour** (the leadership style chosen)
+
 ### Individual Power
 * **Position Power**
 	* Legitimate power (derived from job position)
@@ -392,7 +408,24 @@ Opne eprson influencing another to willingly work toward a predetermined objecti
 * Structural Change (organization structure)
 * Cultural Change (Change basic values amployees share)
 
+### Manager's Rule
+* **Transactional** Role (for **routine task**)
+	* Focus on the task at hand
+	* Apply leadership stles based on tasks and relationship orientations
+* **Transformational** Role (for **managing change**)
+	 * Focus on company's mission, strategies, change
+	 * Lead through inspiration and commitment
+
 ## Misc.
+### Reverse Mentoring
+Typically younger employees that are more knowing of a particular field mentor typically older superiors or collegues.
+
+Effectiveness:
+
+* Communication culture in company
+* Willigness of older to learn
+* Subject of mentoring (technolgoy)
+
 ### Realistic Job Previews
 Early stage of personell selection, provide information on both positive and negative aspects of the job. Employee enters contract with their eyes open, knowing not only what the organization will provide but also what is expected from him.
 RJPs prevent a high turnover rate for new hires.
