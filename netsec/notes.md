@@ -126,6 +126,22 @@ The ciphier method must not be required to be secret, and it must be able to fal
 	- Used in: IPSec, Signal, maybe TLS 1.3
 	- **Considered the most secure**
 
+#### Algorithms
+- HMAC
+	- `H(K + opad | H(K + ipad | m))`
+	- K: Key extended to block length by appending 0's, then XORed with *opad*/*ipad*
+	- H: hash function applied in a nested way
+- CBC-MAC
+	- Encrypt message in CBC mode, take last ciphertext block as MAC
+	- Requires different keys for Encryption and MAC! (othwise last blocks are the same)
+	- Can be prone to length-extension attacks!
+- CMAC
+	- Like CBC-MAC, but XOR the **last** message block with:
+		- Km if the block length has correct length
+		- Kp if the block needs padding
+	- Km, Kp derived from K (used for block cipher)
+	- Fixes length-extension attacks
+
 ### Hash Functions
 #### Properties
 * 1st pre-image resistance:
@@ -136,3 +152,7 @@ The ciphier method must not be required to be secret, and it must be able to fal
 	* infeasible to find `x, x'` s.t. `H(x) = H(x')`
 * Random oracle property:
 	* computationally infeasible to distinguish `H(m)` from random n-bit
+
+#### Cryptographic Hash Functions
+- Merkle-Damgård construction (MD5, SHA-1)
+- SHA-3 (Keccak)
